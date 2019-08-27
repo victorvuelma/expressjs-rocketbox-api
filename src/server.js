@@ -5,7 +5,14 @@ const socket = require('socket.io')
 
 const app = express()
 const server = require('http').Server(app)
+
 const io = socket(server)
+
+io.on('connection', (socket) => {
+  socket.on('connectRoom', (box) => {
+    socket.join(box)
+  })
+})
 
 mongoose.connect(
   'mongodb+srv://rocketbox:rocketbox123@vuelma00-tz33q.mongodb.net/rocketbox?retryWrites=true&w=majority',
@@ -13,6 +20,12 @@ mongoose.connect(
     useNewUrlParser: true
   }
 )
+
+app.use((req, res, next) => {
+  req.io = io
+
+  return next()
+})
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
