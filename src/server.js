@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const socket = require('socket.io')
+const cors = require('cors')
 
 const app = express()
 const server = require('http').Server(app)
@@ -21,6 +22,7 @@ mongoose.connect(
   }
 )
 
+app.use(cors())
 app.use((req, res, next) => {
   req.io = io
 
