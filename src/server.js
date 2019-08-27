@@ -4,6 +4,9 @@ const path = require('path')
 const socket = require('socket.io')
 const cors = require('cors')
 
+const dotenv = require('dotenv')
+dotenv.config()
+
 const app = express()
 const server = require('http').Server(app)
 
@@ -15,11 +18,9 @@ io.on('connection', (socket) => {
   })
 })
 
-mongoose.connect(
-  'mongodb+srv://rocketbox:rocketbox123@vuelma00-tz33q.mongodb.net/rocketbox?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true
-  }
+mongoose.connect(process.env.MONGODB_SRV, {
+  useNewUrlParser: true
+}
 )
 
 app.use(cors())
