@@ -1,4 +1,5 @@
-tmp/
+tmp/*
+!tmp/.gitkeep
 
 # Created by https://www.gitignore.io/api/git,node,linux,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,node,linux,visualstudiocode
